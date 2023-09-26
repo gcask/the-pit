@@ -1,0 +1,69 @@
+# SPDX-License-Identifier: MPL-2.0
+# 
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+# Generates a descriptor using Waratah:
+# https://github.com/microsoft/hidtools/
+# WaratahCmd.exe --source thepit.wara --destination descriptor
+# Manual edits required, namely to fix the range of the logical values (12-bit resolution)
+# * replace <memory> header by <stdint.h>
+# * Change axis logicalMin to 0
+# * Change axis logical Max to 0xFF, 0x07 (2,047)
+# * Declare as extern const PROGMEM.
+# * Add pragma once
+# * Add license
+
+[[settings]]
+cppDescriptorName = 'thepithidReportDescriptor'
+
+[[applicationCollection]]
+usage = ['Generic Desktop', 'Joystick']
+    [[applicationCollection.inputReport]]
+        [[applicationCollection.inputReport.variableItem]]
+        usageRange = ['Button', 'Button 1', 'Button 128']
+        logicalValueRange = [0, 1]
+
+        [[applicationCollection.inputReport.physicalCollection]]
+        usage = ['Generic Desktop', 'Pointer']
+            [[applicationCollection.inputReport.physicalCollection.variableItem]]
+            usage = ['Generic Desktop', 'X']
+            logicalValueRange = 'maxSignedSizeRange'
+            sizeInBits = 16
+
+            [[applicationCollection.inputReport.physicalCollection.variableItem]]
+            usage = ['Generic Desktop', 'Y']
+            logicalValueRange = 'maxSignedSizeRange'
+            sizeInBits = 16
+
+            [[applicationCollection.inputReport.physicalCollection.variableItem]]
+            usage = ['Generic Desktop', 'Z']
+            logicalValueRange = 'maxSignedSizeRange'
+            sizeInBits = 16
+
+            [[applicationCollection.inputReport.physicalCollection.variableItem]]
+            usage = ['Generic Desktop', 'Rx']
+            logicalValueRange = 'maxSignedSizeRange'
+            sizeInBits = 16
+
+            [[applicationCollection.inputReport.physicalCollection.variableItem]]
+            usage = ['Generic Desktop', 'Ry']
+            logicalValueRange = 'maxSignedSizeRange'
+            sizeInBits = 16
+
+            [[applicationCollection.inputReport.physicalCollection.variableItem]]
+            usage = ['Generic Desktop', 'Rz']
+            logicalValueRange = 'maxSignedSizeRange'
+            sizeInBits = 16 
+
+            [[applicationCollection.inputReport.physicalCollection.variableItem]]
+            usage = ['Generic Desktop', 'Dial']
+            logicalValueRange = 'maxSignedSizeRange'
+            sizeInBits = 16
+            
+            [[applicationCollection.inputReport.physicalCollection.variableItem]]
+            usage = ['Generic Desktop', 'Slider']
+            logicalValueRange = 'maxSignedSizeRange'
+            sizeInBits = 16  
+        
